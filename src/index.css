@@ -1,1 +1,38 @@
 @import "tailwindcss";
+
+/* Crawl from just off the left edge to just off the right edge. */
+@keyframes worm-crawl {
+  from {
+    transform: translateX(-15vw);
+  }
+  to {
+    transform: translateX(110vw);
+  }
+}
+
+/* Each segment bobs up and down; staggered delays make a ripple like a real crawl. */
+@keyframes worm-bob {
+  0%,
+  100% {
+    transform: translateY(1px);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
+}
+
+.worm-crawl {
+  animation: worm-crawl 18s linear infinite;
+}
+
+.worm-segment {
+  animation: worm-bob 0.7s ease-in-out infinite;
+}
+
+/* Respect people who have asked their system to reduce motion. */
+@media (prefers-reduced-motion: reduce) {
+  .worm-crawl,
+  .worm-segment {
+    animation: none;
+  }
+}
